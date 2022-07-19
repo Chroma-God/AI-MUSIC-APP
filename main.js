@@ -1,6 +1,7 @@
 song1 = "";
 song2 = "";
 scoreLeftWrist = 0;
+scoreRightWrist = 0;
 leftWristX = 0;
 leftWristY = 0;
 rightWristX = 0;
@@ -38,6 +39,14 @@ function draw() {
             song2.play();
         }
     }
+    if (scoreRightWrist > 0.2) {
+        circle(rightWristx, rightWristY, 20);
+        song2.stop();
+        if (song1_status == false) {
+            document.getElementById("song_display").innerHTML = "Playing Harry Potter Theme";
+            song1.play();
+        }
+    }
 }
 
 function play() {
@@ -56,6 +65,9 @@ function gotPoses(results) {
         console.log(results);
         scoreLeftWrist = results[0].pose.keypoints[9].score;
         console.log("scoreLeftWrist = " + scoreLeftWrist);
+        scoreRightWrist = results[0].pose.keypoints[10].score;
+        console.log("scoreRightWrist = " + scoreRightWrist);
+        
 
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
